@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import theme from "./assets/theme";
+import NotFound from "./Pages/NotFound";
+import Home from "./Pages/Home";
+import AddClient from "./Pages/AddClient";
+import UpdateClient from "./Pages/UpdateClient";
+import { ADD_CLIENT, UPDATE_CLIENT, HOME } from "./constants/routes";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Routes>
+          <Route path={HOME} element={<Home />} />
+          <Route path={ADD_CLIENT} element={<AddClient />} />
+          <Route path={`${UPDATE_CLIENT}/:id`} element={<UpdateClient />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 
