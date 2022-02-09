@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { Box, Paper, TextField, useTheme } from "@mui/material";
+import { Box, Paper, TextField, Typography, useTheme } from "@mui/material";
 import { useFormik } from "formik";
 import ContainerFloatingAction from "../components/ContainerFloatingAction";
 import ContainerPage from "../components/ContainerPage";
@@ -9,6 +9,8 @@ import FloatingButton from "../components/FloatingButton";
 import { addClient } from "../actions/clientActions";
 import addClientSchema from "../schemas/addClientSchema";
 import { HOME } from "../constants/routes";
+import StyledInput from "../components/StyledInput";
+import _ from "lodash";
 
 const AddClient = () => {
   const theme = useTheme();
@@ -30,18 +32,20 @@ const AddClient = () => {
   return (
     <ContainerPage title="Ajouter client">
       <Paper
-        elevation={3}
+        elevation={0}
         sx={{
-          backgroundColor: theme.palette.primary.main,
-          borderRadius: 4,
+          backgroundColor: "#23233F",
+          border:theme.palette.primary.main,
+          border:"1px solid rgb(51,55,103)",
+          borderRadius: "10px",
           p: 3,
         }}
       >
+        <Typography variant="h7"  sx={{mb:2,display:"block",color:"#a7b7e3" }}>Informations générales</Typography>
         <form onSubmit={formik.handleSubmit}>
-          <TextField
+          <StyledInput
             fullWidth
             label="Prénom"
-            color="secondary"
             name="firstName"
             sx={{ my: 1 }}
             error={Boolean(formik.touched.firstName && formik.errors.firstName)}
@@ -50,7 +54,7 @@ const AddClient = () => {
             helperText={formik.touched.firstName && formik.errors.firstName}
             value={formik.values.firstName}
           />
-          <TextField
+          <StyledInput
             label="Nom"
             color="secondary"
             sx={{ my: 1 }}
@@ -62,7 +66,7 @@ const AddClient = () => {
             onChange={formik.handleChange}
             value={formik.values.lastName}
           />
-          <TextField
+          <StyledInput
             color="secondary"
             fullWidth
             label="Age"
@@ -75,7 +79,7 @@ const AddClient = () => {
             value={formik.values.age}
             sx={{ my: 1 }}
           />
-          <TextField
+          <StyledInput
             name="region"
             color="secondary"
             fullWidth
@@ -99,7 +103,10 @@ const AddClient = () => {
           variant="save"
           onClick={() => {
             formik.handleSubmit();
-            navigate(HOME);
+            console.log(formik.errors)
+            if(_.isEmpty(formik.errors)){
+              navigate(HOME);
+            }
           }}
         />
       </ContainerFloatingAction>

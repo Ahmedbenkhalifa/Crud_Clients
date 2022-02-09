@@ -1,14 +1,23 @@
 import React from "react";
-import { Fab } from "@mui/material";
+import { Fab, styled } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import CheckIcon from "@mui/icons-material/Check";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import { Link } from "react-router-dom";
 import { ADD_CLIENT } from "../constants/routes";
 
+const StyledFab = styled(Fab)(({theme})=>({
+  backgroundColor: theme.palette.primary.main,
+  color: "white",
+  fontSize:"12px",
+  "&:hover":{
+    backgroundColor:theme.palette.primary.main
+  }
+}));
+
 const FloatingButton = ({ variant, onClick, ...rest }) => {
   return (
-    <Fab
+    <StyledFab
       variant="extended"
       onClick={onClick}
       component={variant === "add" ? Link : "div"}
@@ -17,7 +26,7 @@ const FloatingButton = ({ variant, onClick, ...rest }) => {
     >
       <Icon variant={variant} sx={{ mr: 1 }} />
       {label(variant)}
-    </Fab>
+    </StyledFab>
   );
 };
 

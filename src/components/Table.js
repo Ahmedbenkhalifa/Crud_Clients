@@ -31,9 +31,39 @@ export default function DataGridDemo({ searchTerm, filter, sx, ...rest }) {
     <Box sx={{ height: 400, width: "100%", ...sx }} {...rest}>
       <DataGrid
         rows={searchTerm ? searchedClients : filteredClients}
+        rowHeight={30}
+        headerHeight	={40}
+        withBorder={false}
         columns={columns}
         rowsPerPageOptions={[5, 25, 100]}
         onRowClick={(params)=>navigate(`${UPDATE_CLIENT}/${params.id}`)}
+        sx={{
+          borderRadius:"5px",
+          border:"1px solid rgb(51,55,103)",
+          overflow:"hidden",
+          '& .MuiDataGrid-columnHeaders': {
+            backgroundColor: '#333058',
+          },
+          '& .MuiDataGrid-cell':{
+            borderBottom:"none"
+          },
+          "& .MuiTablePagination-selectLabel":{
+            display:"none"
+          },
+          "& .MuiTablePagination-toolbar":{
+            width:"100%",
+            justifyContent:"space-between"
+          },
+          "& .MuiTablePagination-root":{
+            width:"100%",
+          },
+          "& .MuiTablePagination-spacer":{
+            display:"none",
+          },
+          "& .MuiTablePagination-select":{
+            flex:"1",
+          },
+        }}
       />
     </Box>
   );

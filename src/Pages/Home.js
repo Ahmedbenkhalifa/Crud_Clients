@@ -13,7 +13,7 @@ const Home = () => {
   console.log(searchTerm)
   return (
     <ContainerPage title="Liste des clients">
-      <Box sx={{ dispay: "flex", mb: 3 }}>
+      <Box sx={{ display: "flex", mb: 3 }}>
         <SearchBar searchTerm={searchTerm} handleSearchTerm={value=>setSearchTerm(value)} />
         <FilterSelect filter={filter} setFilter={value=>setFilter(value)} />
       </Box>
